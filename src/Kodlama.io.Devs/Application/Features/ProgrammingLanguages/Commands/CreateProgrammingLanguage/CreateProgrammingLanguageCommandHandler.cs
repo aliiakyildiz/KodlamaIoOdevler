@@ -12,25 +12,25 @@ using System.Threading.Tasks;
 
 namespace Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage
 {
-    public class CreateProgrammingLanguageHandler : IRequestHandler<CreateProgrammingLanguageRequest, CreatedProgrammingLanguageDto>
+    public class CreateProgrammingLanguageCommandHandler : IRequestHandler<CreateProgrammingLanguageCommandRequest, CreatedProgrammingLanguageDto>
     {
         private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
         private readonly IMapper _mapper;
         private readonly ProgrammingLanguageBusinessRules _programmingLanguageBusinessRules;
 
-        public CreateProgrammingLanguageHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageBusinessRules programmingLanguageBusinessRules)
+        public CreateProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageBusinessRules programmingLanguageBusinessRules)
         {
             _programmingLanguageRepository = programmingLanguageRepository;
             _mapper = mapper;
             _programmingLanguageBusinessRules = programmingLanguageBusinessRules;
         }
 
-        public async Task<CreatedProgrammingLanguageDto> Handle(CreateProgrammingLanguageRequest request, CancellationToken cancellationToken)
+        public async Task<CreatedProgrammingLanguageDto> Handle(CreateProgrammingLanguageCommandRequest request, CancellationToken cancellationToken)
         {
             await _programmingLanguageBusinessRules.ProgrammingLanguageNameCanNotBeDuplicatedWhenInserted(request.Name);
 
             ProgrammingLanguage mappedLanluage = _mapper.Map<ProgrammingLanguage>(request);
-            ProgrammingLanguage createdLanguage = await _programmingLanguageRepository.AddAsync(mappedLanluage);
+            ProgrammingLanguage createdLanguage = await _programmingLanguageRepository.UpdateAsync(mappedLanluage);
             CreatedProgrammingLanguageDto createdProgrammingLanguageDto = _mapper.Map<CreatedProgrammingLanguageDto>(createdLanguage);
 
             return createdProgrammingLanguageDto;

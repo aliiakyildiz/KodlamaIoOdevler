@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage
 {
-    public class CreateProgrammingLanguageValidator : AbstractValidator<CreateProgrammingLanguageRequest>
+    public class CreateProgrammingLanguageCommandValidator : AbstractValidator<CreateProgrammingLanguageCommandRequest>
     {
-        public CreateProgrammingLanguageValidator()
+        public CreateProgrammingLanguageCommandValidator()
         {
             RuleFor(x => x.Name).NotEmpty();
         }

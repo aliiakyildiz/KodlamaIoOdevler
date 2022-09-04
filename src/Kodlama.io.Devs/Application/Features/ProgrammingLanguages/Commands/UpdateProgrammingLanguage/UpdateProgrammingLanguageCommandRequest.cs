@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage
+namespace Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage
 {
-    public class CreateProgrammingLanguageRequest :IRequest<CreatedProgrammingLanguageDto>
+    public class UpdateProgrammingLanguageCommandRequest : IRequest<UpdatedProgrammingLanguageDto>
     {
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }
